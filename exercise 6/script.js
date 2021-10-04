@@ -1,0 +1,60 @@
+"Use Strict";
+
+let dishes = [];
+dishes.push({
+    id: '1',
+    name: 'Burger',
+    price: '8'
+} , {
+    id: '2',
+    name: 'Fries',
+    price: '3'
+}, {
+    id: '3',
+    name: 'Frikandel',
+    price: '5'
+});
+
+window.onload = function () {
+    console.log("loaded");
+
+    dishes.forEach(element => {
+       let radio = `<input type="radio" name="burger" id="${element.name}">
+       <label for="${element.id}">${element.name}</label>`;
+       document.getElementById('radio').insertAdjacentHTML("afterend", radio);
+    });
+
+    
+
+    document.getElementById("form").addEventListener('submit', event => {
+        event.preventDefault();
+       
+
+        printOrder();
+
+
+
+    });
+};
+
+
+function printOrder() {
+    let orderList = {
+        name: "",
+        email: "",
+        order: ""
+    }
+    orderList.name = document.getElementById('nameInput').value;
+    orderList.email = document.getElementById('emailInput').value;
+
+    dishes.forEach(element => {
+        let check = document.getElementById(element.name).checked
+        if (check) {
+            orderList.order.push(element.name);
+        }
+        console.log(orderList);
+
+    });
+    let message = `<p>The order for the customer ${order.name} is the following:  ${order.order}. The customer may be notified by email: ${order.email}</p>`
+    document.getElementById('message').innerHTML = message;
+};
