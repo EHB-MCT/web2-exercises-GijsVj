@@ -1,5 +1,7 @@
 "Use Strict";
 
+let totalPrice = 0;
+
 let dishes = [];
 dishes.push({
     id: '1',
@@ -32,9 +34,16 @@ window.onload = function () {
 
         printOrder();
 
+        
 
 
     });
+
+    document.getElementById("calculateButton").addEventListener('submit', event => {
+        event.preventDefault();
+
+        calculatePrice();
+    })
 };
 
 
@@ -48,7 +57,7 @@ function printOrder() {
     orderList.email = document.getElementById('emailInput').value;
 
     dishes.forEach(element => {
-        let check = document.getElementById(element.name).checked
+        let check = document.getElementById(element.name).checked;
         if (check) {
             orderList.order.push(element.name);
         }
@@ -58,3 +67,16 @@ function printOrder() {
     let message = `<p>The order for the customer ${orderList.name} is the following:  ${orderList.order}. The customer may be notified by email: ${orderList.email}</p>`
     document.getElementById('message').innerHTML = message;
 };
+
+function calculatePrice() {
+    totalPrice = 0;
+    dishes.forEach(element => {
+        let check = document.getElementById(element.name).checked;
+        if (check) {
+            totalPrice = totalPrice+element.price;
+        }
+    }); 
+    let messagePrice = `<p>The price is $${totalPrice}</p>`;
+    document.getElementById("messagePrice").innerHTML = messagePrice;
+    console.log(messagePrice);
+}
