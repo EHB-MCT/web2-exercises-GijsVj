@@ -1,18 +1,20 @@
 "Use Strict";
 
-let pokemon = [];
-let list = [];
+let list, pokemon = []
 
-fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
-.then(response => {
-    return response.json();
-}).then(data => {
-    list = data.response;
-    for (let element of list){
-        fetch(element.url).then(response => {
+function getData() {
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
+        .then(response => {
             return response.json();
         }).then(data => {
-            pokemon.push(data)
+            list = data.response;
+            for (let element of list) {
+                fetch(element.url).then(response => {
+                    return response.json();
+                }).then(data => {
+                    pokemon.push(data)
+                    console.log(list)
+                })
+            }
         })
-    }
-})
+}
