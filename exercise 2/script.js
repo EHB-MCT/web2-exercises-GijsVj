@@ -1,4 +1,3 @@
-"Use Strict";
 
 let list, pokemon = []
 
@@ -7,14 +6,25 @@ function getData() {
         .then(response => {
             return response.json();
         }).then(data => {
-            list = data.response;
+            list = data.results;
             for (let element of list) {
                 fetch(element.url).then(response => {
                     return response.json();
                 }).then(data => {
                     pokemon.push(data)
-                    console.log(list)
                 })
             }
         })
+}
+
+window.onload = function() {
+
+    getData();
+
+    setTimeout(buildlist, 3000);
+
+    function buildlist() {
+        console.log(pokemon);
+        console.log(list);
+    }
 }
