@@ -1,3 +1,4 @@
+import team from './team';
 "Use Strict";
 
 let dishes = [];
