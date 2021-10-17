@@ -5,7 +5,7 @@ let pokemon = [];
 let team1 = new Team();
 
 function getData(){
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=300')
     .then(response => {
         return response.json();
     }).then(data => {
